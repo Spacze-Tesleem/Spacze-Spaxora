@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 };
 export const viewport: Viewport = { themeColor: "#102b25" };
 export default function RootLayout({ children }: { children: ReactNode }) {
- return <html lang="en"><body>{children}</body></html>;
+ return <html lang="en"><body className="bg-spacze-paper font-sans text-spacze-ink">{children}</body></html>;
 }

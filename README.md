@@ -1,6 +1,6 @@
 # SPACZE — Spaxora
 
-Next.js App Router with TypeScript and React. The landing page is a Server Component; the interactive demo is a Client Component using React state.
+Next.js App Router with TypeScript, React, and Tailwind CSS v4. The landing page is a Server Component; the interactive demo is a Client Component using React state.
 
 ## Development
 Use Node.js 20.9 or newer.
@@ -17,6 +17,9 @@ npm run build
 npm start
 ```
 A package lock must be generated and committed after the first successful installation. Dependencies have not been installed in this environment.
+
+## Styling
+Tailwind v4 uses @tailwindcss/postcss and CSS theme tokens in app/globals.css. Use utilities such as bg-spacze-ink, text-spacze-muted, and font-display. Existing draft styles are in the components layer so utilities can override them. Preflight is intentionally omitted to preserve the existing browser defaults during incremental migration.
 
 ## Structure
 - app/page.tsx: landing page
