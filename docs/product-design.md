@@ -26,4 +26,4 @@ Sign up → describe business → review suggested strategy → add product → 
 White and soft neutral surfaces, deep green actions, clear typography, spacious layouts. Richer animation may be used in the landing hero; daily dashboard tasks prioritize clarity. Respect reduced-motion preferences.
 
 ## Current milestone
-Initial static landing page and four interactive sample workspace panels only. This is an initial visual draft, not the complete prototype. Authentication, onboarding, product editing, real AI, persistence, integrations, and live publishing remain unimplemented.
+Initial Next.js landing page and four interactive sample workspace panels only. This is an initial visual draft, not the complete prototype. Authentication, onboarding, product editing, real AI, persistence, integrations, and live publishing remain unimplemented.

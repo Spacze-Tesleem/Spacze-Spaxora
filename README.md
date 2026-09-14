@@ -1,30 +1,34 @@
 # SPACZE — Spaxora
 
-First milestone: a responsive landing page and interactive commerce workspace preview.
+Next.js App Router with TypeScript and React. The landing page is a Server Component; the interactive demo is a Client Component using React state.
 
-## Run
-Serve the repository with any static web server. For example, with Python installed:
-
+## Development
+Use Node.js 20.9 or newer.
 ```sh
-python3 -m http.server 3000
+npm install
+npm run dev
 ```
+Open http://localhost:3000.
 
-Open http://localhost:3000. No build step or package installation is required.
+## Validation and production
+```sh
+npm run typecheck
+npm run build
+npm start
+```
+A package lock must be generated and committed after the first successful installation. Dependencies have not been installed in this environment.
 
 ## Structure
-- index.html: landing page and accessible workspace shell
-- styles.css: green brand foundation and responsive layouts
-- app.js: four demo views and session-only approval interactions
+- app/page.tsx: landing page
+- app/layout.tsx: root layout and metadata
+- app/globals.css: responsive brand styles
+- components/workspace-preview.tsx: interactive demo
+- lib/demo-data.ts: sample workspace content
+- docs/product-design.md: complete 00–14 product scope
 
-## Scope
-All business figures and tasks are sample data. Approval buttons only update memory in the browser. No authentication, database, real AI, publishing, billing, or integrations are implemented. No form collects personal data. Google Fonts is optional; system font fallbacks are included.
+## Current scope
+Demo data only. Approval actions remain in browser memory. Authentication, database, real AI, integrations, and publishing are not implemented.
+Google Fonts is loaded through CSS with local fallbacks.
 
-## Next milestones
-1. Review the landing page direction.
-2. Move the approved UI into the production application framework.
-3. Implement authentication and founder onboarding.
-4. Add persisted products, strategy, and campaign workflows.
-5. Connect AI suggestions and approval-gated integrations.
-
-## Verification
-JavaScript syntax checked before commit. Browser rendering and runtime interaction checks are still required; this environment did not expose a browser or shell runtime.
+## Validation status
+Source/configuration reviewed. No shell or browser runtime was available; installation, TypeScript checking, production build, and browser checks remain pending.
