@@ -1,0 +1,21 @@
+const views = {
+strategy: {title:"A little clarity. A big next step.", subtitle:"Here’s where Olive Studio is headed.", badge:"Your launch plan", stats:[["Launch readiness","68%","Sample progress"],["Focus this week","3 tasks","A manageable next step"],["Target audience","Defined","Design-conscious buyers"]], heading:"Make your first collection count.", copy:"Start with a focused collection of everyday essentials. Tell a consistent story across your products, storefront, and first campaign.", tasks:["✓ Define your ideal customer","○ Add your first collection","○ Review your launch campaign"]},
+storefront: {title:"A home for your collection.", subtitle:"Bring your products and your brand together.", badge:"Draft storefront", stats:[["Products","8","Sample catalogue"],["Collections","2","Everyday / Weekend"],["Storefront","Draft","Not published"]], heading:"Olive. Objects for everyday living.", copy:"A considered collection of useful, beautiful things. Your storefront brings the story, imagery, and details into one place.", tasks:["✓ Choose your brand palette","○ Add product photography","○ Review delivery information"]},
+marketing: {title:"Give your next idea a voice.", subtitle:"Plan your story before you press publish.", badge:"Campaign planning", stats:[["Draft campaigns","2","Awaiting review"],["Channels","3","Planned connections"],["Scheduled posts","0","Nothing connected yet"]], heading:"Meet your everyday essentials.", copy:"Introduce the collection through the moments your customers know: a slower morning, a favorite corner, a small daily ritual.", tasks:["✓ Draft the campaign concept","○ Review creative and copy","○ Connect publishing channels"]}
+};
+const panel = document.getElementById("panel");
+const tabs = [...document.querySelectorAll("[role=tab]")];
+const approved = new Set();
+function render(view){
+ tabs.forEach(tab=>{const selected=tab.dataset.view===view;tab.setAttribute("aria-selected",String(selected));tab.tabIndex=selected?0:-1;});
+ panel.setAttribute("aria-labelledby","tab-"+view);
+ document.getElementById("breadcrumb").textContent=view[0].toUpperCase()+view.slice(1);
+ if(view==="approvals"){
+ panel.innerHTML='<div class="panel-header"><div><h3>Your call. Every time.</h3><p>Review suggestions before they become actions.</p></div><span class="pill">Demo decisions</span></div>'+["Launch campaign copy","Collection introduction"].map((title,i)=>'<article class="approval"><div><h4>'+title+'</h4><p>'+(approved.has(i)?"Approved in this demo only.":"Draft suggestion · Ready for your review")+'</p></div><button class="button" data-approve="'+i+'" '+(approved.has(i)?"disabled":"")+'>'+(approved.has(i)?"Approved ✓":"Approve demo")+'</button></article>').join("")+'<p class="demo-note" role="status">'+approved.size+' of 2 demo suggestions approved. Reloading resets these decisions.</p>';
+ panel.querySelectorAll("[data-approve]").forEach(button=>button.addEventListener("click",()=>{approved.add(Number(button.dataset.approve));render("approvals");document.querySelector(".count").textContent=String(2-approved.size);panel.focus();}));return;
+ }
+ const data=views[view];
+ panel.innerHTML='<div class="panel-header"><div><h3>'+data.title+'</h3><p>'+data.subtitle+'</p></div><span class="pill">'+data.badge+'</span></div><div class="stats">'+data.stats.map(stat=>'<div class="stat"><small>'+stat[0]+'</small><strong>'+stat[1]+'</strong><p>'+stat[2]+'</p></div>').join("")+'</div><div class="insight"><article class="feature-card"><span class="eyebrow">✳ A POSSIBLE NEXT MOVE</span><h4>'+data.heading+'</h4><p>'+data.copy+'</p></article><article class="task-card"><h4>Your next steps</h4>'+data.tasks.map(task=>'<div class="task">'+task+'</div>').join("")+'</article></div>';
+}
+tabs.forEach((tab,index)=>{tab.addEventListener("click",()=>render(tab.dataset.view));tab.addEventListener("keydown",event=>{let next=index;if(event.key==="ArrowDown"||event.key==="ArrowRight")next=(index+1)%tabs.length;else if(event.key==="ArrowUp"||event.key==="ArrowLeft")next=(index+tabs.length-1)%tabs.length;else if(event.key==="Home")next=0;else if(event.key==="End")next=tabs.length-1;else return;event.preventDefault();tabs[next].focus();render(tabs[next].dataset.view);});});
+render("strategy");
